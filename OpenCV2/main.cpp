@@ -20,12 +20,13 @@ int main(int argc, char** argv)
 		return -1;
 
 	CascadeClassifier haar_cascade;
-	haar_cascade.load("C:/opencv/sources/data/haarcascades/haarcascade_frontalface_alt.xml");
+	haar_cascade.load("C:/opencv/data/haarcascades/haarcascade_frontalface_alt.xml");
 		
 	Mat frame;
 	int picN = 0, i = 0, prePic = 1;
 	string picpath = "C:/Users/LenovoS510p/Documents/Semester1_2016/Computer_Engineering_Design3/Face_Recognition/MyfaceBase/S";
 	string picdir;
+	Mat dst;
 
 	for (;;)
 	{
@@ -51,8 +52,9 @@ int main(int argc, char** argv)
 			Mat face = gray(face_i);
 
 			if (picN != prePic) {
-				picdir = picpath + to_string(0) + "/" + to_string(picN) + ".pgm";
-				imwrite(picdir, face, compression_params);
+				picdir = picpath + to_string(1) + "/" + to_string(picN) + ".pgm";
+				resize(face, dst, Size(50, 50), 0, 0, INTER_CUBIC);
+				imwrite(picdir, dst, compression_params);
 				prePic = picN;
 			}
 
